@@ -7,6 +7,10 @@
     android:layout_height="match_parent"
     tools:context="com.example.yunfei.budgetbuddy.MainActivity">
 
+
+    <include layout="@layout/tool_bar_layout"
+            android:id="@+id/home_page_toolbar"/>
+
     <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
