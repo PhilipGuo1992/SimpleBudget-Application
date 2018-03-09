@@ -2,21 +2,41 @@ package com.example.yunfei.budgetbuddy;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class AddBudgetActivity extends AppCompatActivity {
 
     private EditText budgetName;
-
+    private Toolbar addPageToolar;
+    private TextView toolTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_budget);
-    }
 
+        // set tool bar
+        addPageToolar = findViewById(R.id.new_budget_bar);
+        // four line code from online:
+        // https://stackoverflow.com/questions/26533510/android-toolbar-center-title-and-custom-font
+        toolTitle = addPageToolar.findViewById(R.id.toolbar_title);
+        setSupportActionBar(addPageToolar);
+        toolTitle.setText("Add Budget");
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        // set action icon
+        getSupportActionBar().setIcon(R.drawable.ic_action_cancel);
+
+
+
+
+    }
 
 
 

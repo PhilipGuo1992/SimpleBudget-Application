@@ -12,21 +12,27 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
-    private TextView mTextMessage;
+    //private TextView mTextMessage;
 
     private Toolbar mainPageToolar;
+    private TextView toolTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mTextMessage = (TextView) findViewById(R.id.message);
+       // mTextMessage = (TextView) findViewById(R.id.message);
 
         // set tool bar
         mainPageToolar = findViewById(R.id.home_page_toolbar);
+        toolTitle = mainPageToolar.findViewById(R.id.toolbar_title);
+
         setSupportActionBar(mainPageToolar);
-        getSupportActionBar().setTitle("Budget Buddy");
+
+        toolTitle.setText("Budget Buddy");
+
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);

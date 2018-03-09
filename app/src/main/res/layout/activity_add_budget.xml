@@ -57,8 +57,9 @@
                 android:orientation="horizontal"
                 android:layout_height="wrap_content">
                 <TextView
-                    android:text="@string/budgetName"
+                    android:text="@string/budgetType"
                     android:textSize="20sp"
+                    android:layout_marginTop="15dp"
                     android:layout_marginLeft="8dp"
                     android:textColor="@color/colorAccent"
                     android:layout_width="wrap_content"
@@ -66,6 +67,7 @@
                 <RadioGroup
                     android:layout_width="wrap_content"
                     android:orientation="vertical"
+                    android:layout_marginLeft="70dp"
                     android:layout_height="wrap_content">
 
                     <RadioButton
@@ -95,7 +97,34 @@
                 android:orientation="horizontal"
                 android:layout_height="wrap_content">
                 <TextView
-                    android:text="@string/budgetName"
+                    android:text="@string/budgetAmount"
+                    android:textSize="20sp"
+                    android:layout_marginLeft="8dp"
+                    android:textColor="@color/colorAccent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <EditText
+                    android:id="@+id/budgetAmount"
+                    android:layout_width="wrap_content"
+                    android:layout_marginLeft="80dp"
+                    android:inputType="number"
+                    android:backgroundTint="@android:color/transparent"
+                    android:hint="Enter a number"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/colorLine"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:text="Date:"
                     android:textSize="20sp"
                     android:layout_marginLeft="8dp"
                     android:textColor="@color/colorAccent"
@@ -115,51 +144,23 @@
                 android:layout_height="2dp"
                 android:background="@color/colorLine"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:orientation="horizontal"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:text="@string/budgetName"
+
+            <TextView
+                    android:text="Add notes: "
                     android:textSize="20sp"
                     android:layout_marginLeft="8dp"
+                    android:layout_marginTop="10dp"
                     android:textColor="@color/colorAccent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
-                <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_marginLeft="80dp"
-                    android:backgroundTint="@android:color/transparent"
-                    android:hint="Enter a Name"
-                    android:layout_height="wrap_content" />
 
-            </LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="@color/colorLine"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:orientation="horizontal"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:text="@string/budgetName"
-                    android:textSize="20sp"
-                    android:layout_marginLeft="8dp"
-                    android:textColor="@color/colorAccent"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_marginLeft="80dp"
-                    android:backgroundTint="@android:color/transparent"
-                    android:hint="Enter a Name"
-                    android:layout_height="wrap_content" />
-
-            </LinearLayout>
-
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:backgroundTint="@android:color/transparent"
+                android:hint="Enter some notes "
+                android:layout_height="100dp" />
 
 
         </LinearLayout>
@@ -167,7 +168,16 @@
 
 
     <Button
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@color/colorPrimaryDark"
         android:text="@string/colorSaveBud"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:layout_marginTop="10dp"
+        android:text="cancle the budget"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
