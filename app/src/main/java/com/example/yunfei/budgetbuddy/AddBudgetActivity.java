@@ -30,14 +30,14 @@ public class AddBudgetActivity extends AppCompatActivity {
         toolTitle.setText("Add Budget");
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        // set action icon
-        //getSupportActionBar().setIcon(R.drawable.ic_action_cancel);
+        // set action icon; code from StackOverflow
+        //https://stackoverflow.com/questions/26582075/cannot-catch-toolbar-home-button-click-event/31499604
         addPageToolar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_action_cancel));
         addPageToolar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(), "go back", Toast.LENGTH_SHORT).show();
-                
+
             }
         });
 
