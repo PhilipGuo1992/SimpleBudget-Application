@@ -12,10 +12,10 @@ import android.view.ViewGroup;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ListItemsFragment extends android.support.v4.app.Fragment {
+public class BudgOrderFragment extends android.support.v4.app.Fragment {
 
 
-    public ListItemsFragment() {
+    public BudgOrderFragment() {
         // Required empty public constructor
     }
 
@@ -28,7 +28,7 @@ public class ListItemsFragment extends android.support.v4.app.Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View listItemsView = inflater.inflate(R.layout.fragment_list_items, container, false);
+        View listItemsView = inflater.inflate(R.layout.fragment_order_items, container, false);
 
 
 
