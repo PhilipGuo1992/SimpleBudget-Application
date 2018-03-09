@@ -5,7 +5,11 @@
     <string name="title_summary">Summary</string>
     <string name="title_lists">List</string>
 
+    <string name="budgetName">Budget Name:</string>
+    <string name="budgetType">Budget Type:</string>
+    <string name="budgetAmount">Budget Amount:</string>
 
+    <string name="colorSaveBud">Save the Budget</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
