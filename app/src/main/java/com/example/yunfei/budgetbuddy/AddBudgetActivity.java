@@ -31,9 +31,15 @@ public class AddBudgetActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         // set action icon
-        getSupportActionBar().setIcon(R.drawable.ic_action_cancel);
-
-
+        //getSupportActionBar().setIcon(R.drawable.ic_action_cancel);
+        addPageToolar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_action_cancel));
+        addPageToolar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "go back", Toast.LENGTH_SHORT).show();
+                
+            }
+        });
 
 
     }
