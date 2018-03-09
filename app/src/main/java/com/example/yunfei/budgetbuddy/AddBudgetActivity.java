@@ -10,9 +10,19 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Date;
+
 public class AddBudgetActivity extends AppCompatActivity {
 
     private EditText budgetName;
+    // default
+    private String budgetType = "expense";
+    private EditText budgetAmount;
+    private Date budgetDate;
+    private EditText notes;
+
+
+
     private Toolbar addPageToolar;
     private TextView toolTitle;
 
@@ -37,9 +47,42 @@ public class AddBudgetActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(), "go back", Toast.LENGTH_SHORT).show();
+                // go back to parent activity
 
             }
         });
+
+
+        // get widgets
+        budgetName = findViewById(R.id.budget_name);
+        budgetAmount = findViewById(R.id.budgetAmount);
+
+
+
+
+    }
+
+
+
+    public void clickSaveBudget(View view) {
+        // check if enter values are legal
+
+
+        // could it be nuul?
+        if (budgetAmount.getText().toString() != null) {
+            double amount = Double.parseDouble(budgetAmount.getText().toString());
+
+        }
+
+
+
+
+
+
+        Toast.makeText(getApplicationContext(), "save it! " + budgetAmount.getText().toString(), Toast.LENGTH_SHORT).show();
+
+
+        // write to firebase
 
 
     }
@@ -55,10 +98,12 @@ public class AddBudgetActivity extends AppCompatActivity {
             case R.id.radio_expense:
                 if (checked)
                     // save to expense
+                    budgetType = "expense";
                 break;
             case R.id.radio_revenue:
                 if(checked)
                     // save to revenus
+                    budgetType = "revenue";
                 break;
         }
     }

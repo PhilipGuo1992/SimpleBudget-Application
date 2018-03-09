@@ -103,10 +103,18 @@
                     android:textColor="@color/colorAccent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="$"
+                    android:textColor="@color/colorTitle"
+                    android:layout_marginLeft="60dp"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:layout_height="wrap_content" />
                 <EditText
                     android:id="@+id/budgetAmount"
                     android:layout_width="wrap_content"
-                    android:layout_marginLeft="80dp"
+                    android:layout_marginLeft="8dp"
                     android:inputType="number"
                     android:backgroundTint="@android:color/transparent"
                     android:hint="Enter a number"
@@ -168,17 +176,17 @@
 
 
     <Button
-        android:layout_marginTop="20dp"
+        android:id="@+id/saveBudgetBtn"
+        android:onClick="clickSaveBudget"
+        android:layout_marginTop="100dp"
+        android:textColor="@color/saveBug"
+        android:layout_marginBottom="30dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:background="@color/colorPrimaryDark"
         android:text="@string/colorSaveBud"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-    <Button
-        android:layout_marginTop="10dp"
-        android:text="cancle the budget"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+
 
 </LinearLayout>
