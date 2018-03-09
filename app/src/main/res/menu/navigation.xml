@@ -4,16 +4,21 @@
     <item
         android:id="@+id/navigation_home"
         android:icon="@drawable/ic_budget_all"
-        android:title="@string/title_home" />
+        android:title="@string/title_budget" />
 
     <item
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/navigation_add"
         android:icon="@drawable/ic_add_budget"
-        android:title="@string/title_dashboard" />
+        android:title="@string/title_add" />
 
     <item
-        android:id="@+id/navigation_notifications"
-        android:icon="@drawable/ic_notifications_black_24dp"
-        android:title="@string/title_notifications" />
+        android:id="@+id/navigation_summary"
+        android:icon="@drawable/ic_summary_chart"
+        android:title="@string/title_summary" />
+
+    <item
+        android:id="@+id/navigation_lists"
+        android:icon="@drawable/ic_budget_list"
+        android:title="@string/title_lists" />
 
 </menu>
