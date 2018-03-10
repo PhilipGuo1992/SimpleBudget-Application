@@ -166,9 +166,8 @@ public class AddBudgetActivity extends AppCompatActivity implements DatePickerDi
         chooseDate.set(Calendar.DAY_OF_MONTH, day);
 
        // transDate = chooseDate;
+        transDate = new Date();
         transDate.setTime(chooseDate.getTimeInMillis());
-
-        
 
         // change to string
         String dateString = DateFormat.getDateInstance().format(chooseDate.getTime());
