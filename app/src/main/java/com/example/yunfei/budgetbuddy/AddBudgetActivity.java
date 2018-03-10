@@ -46,7 +46,7 @@ public class AddBudgetActivity extends AppCompatActivity implements DatePickerDi
         setContentView(R.layout.activity_add_budget);
 
         database = FirebaseDatabase.getInstance();
-        myRef = database.getReference("expense");
+        myRef = database.getReference();
 
         // set date picker
         DateFormat dateFormat =  new SimpleDateFormat("E MMM dd yyyy");
@@ -127,7 +127,7 @@ public class AddBudgetActivity extends AppCompatActivity implements DatePickerDi
         // get trans instance
         TransactionModel transaction = new TransactionModel(transID, transType, transName, transAmount, transDate, transNote);
         // write to firebase
-        myRef.child(transID).setValue(transaction);
+        myRef.child(budgetType).child(transID).setValue(transaction);
 
         Toast.makeText(getApplicationContext(), "Successfully saved!" , Toast.LENGTH_SHORT).show();
 
