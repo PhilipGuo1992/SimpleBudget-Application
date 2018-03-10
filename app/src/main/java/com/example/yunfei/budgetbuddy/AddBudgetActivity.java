@@ -1,32 +1,40 @@
 package com.example.yunfei.budgetbuddy;
 
-import android.support.v4.app.FragmentManager;
+import android.app.DatePickerDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.text.format.DateUtils;
-import android.view.MenuItem;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-public class AddBudgetActivity extends AppCompatActivity {
+public class AddBudgetActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
     private EditText budgetName;
     // default
     private String budgetType = "expense";
     private EditText budgetAmount;
-    private Date budgetDate;
+    private Date transDate;
     private EditText notes;
-    private TextView datePicker;
-
+    private TextView inputDate;
+    private FirebaseDatabase database;
+    private DatabaseReference myRef;
 
 
     private Toolbar addPageToolar;
@@ -37,17 +45,20 @@ public class AddBudgetActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_budget);
 
-        // set date picker
-        DateFormat dateFormat =  new SimpleDateFormat("MMM dd yyyy");
+        database = FirebaseDatabase.getInstance();
+        myRef = database.getReference();
 
-        datePicker = findViewById(R.id.choose_date);
-        datePicker.setText(dateFormat.format(new Date()));
-        datePicker.setOnClickListener(new View.OnClickListener() {
+        // set date picker
+        DateFormat dateFormat =  new SimpleDateFormat("E MMM dd yyyy");
+
+        inputDate = findViewById(R.id.choose_date);
+        inputDate.setText(dateFormat.format(new Date()));
+
+        inputDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentManager manager = getSupportFragmentManager();
-                DatePickFragment datelog = new DatePickFragment();
-                datelog.show(manager, "CURR_DATE");
+               DatePickFragment datePickFragment = new DatePickFragment();
+               datePickFragment.show(getSupportFragmentManager(), "Pick_Date");
             }
         });
 
@@ -76,7 +87,7 @@ public class AddBudgetActivity extends AppCompatActivity {
         // get widgets
         budgetName = findViewById(R.id.budget_name);
         budgetAmount = findViewById(R.id.budgetAmount);
-
+        notes = findViewById(R.id.enter_notes);
 
 
 
@@ -86,23 +97,41 @@ public class AddBudgetActivity extends AppCompatActivity {
 
     public void clickSaveBudget(View view) {
         // check if enter values are legal
+        String transName = budgetName.getText().toString();
+        String transType = budgetType;
+        String transNote = notes.getText().toString();
+        double transAmount;
 
-
+        if (TextUtils.isEmpty(transName)){
+            budgetName.setError("Required. enter a name");
+            Toast.makeText(getApplicationContext(), "Enter a name", Toast.LENGTH_SHORT).show();
+            return ;
+        }
         // could it be nuul?
-        if (budgetAmount.getText().toString() != null) {
-            double amount = Double.parseDouble(budgetAmount.getText().toString());
+        String mm = budgetAmount.getText().toString();
+        if (!TextUtils.isEmpty(mm)) {
+            transAmount  = Double.parseDouble(budgetAmount.getText().toString());
 
+        } else {
+            budgetAmount.setError("Required. enter amount");
+            return ;
+        }
+        if( transDate == null){
+           transDate = new Date();
+        }
+        if(TextUtils.isEmpty(transNote)){
+            transNote = " ";
         }
 
-
-
-
-
-
-        Toast.makeText(getApplicationContext(), "save it! " + budgetAmount.getText().toString(), Toast.LENGTH_SHORT).show();
-
-
+        String transID = myRef.push().getKey();
+        // get trans instance
+        TransactionModel transaction = new TransactionModel(transID, transType, transName, transAmount, transDate, transNote);
         // write to firebase
+        myRef.child(budgetType).child(transID).setValue(transaction);
+
+        Toast.makeText(getApplicationContext(), "Successfully saved!" , Toast.LENGTH_SHORT).show();
+
+        // go to some where else ? go back to main page.
 
 
     }
@@ -126,5 +155,25 @@ public class AddBudgetActivity extends AppCompatActivity {
                     budgetType = "revenue";
                 break;
         }
+    }
+
+    @Override
+    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+
+        Calendar chooseDate = Calendar.getInstance();
+        chooseDate.set(Calendar.YEAR, year);
+        chooseDate.set(Calendar.MONTH, month);
+        chooseDate.set(Calendar.DAY_OF_MONTH, day);
+
+       // transDate = chooseDate;
+        transDate = new Date();
+        transDate.setTime(chooseDate.getTimeInMillis());
+
+        // change to string
+        String dateString = DateFormat.getDateInstance().format(chooseDate.getTime());
+        // update ui
+        inputDate.setText(dateString);
+
+
     }
 }
