@@ -4,12 +4,20 @@ import android.app.DatePickerDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -22,10 +30,11 @@ public class AddBudgetActivity extends AppCompatActivity implements DatePickerDi
     // default
     private String budgetType = "expense";
     private EditText budgetAmount;
-    private Date budgetDate;
+    private Date transDate;
     private EditText notes;
     private TextView inputDate;
-
+    private FirebaseDatabase database;
+    private DatabaseReference myRef;
 
 
     private Toolbar addPageToolar;
@@ -35,6 +44,9 @@ public class AddBudgetActivity extends AppCompatActivity implements DatePickerDi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_budget);
+
+        database = FirebaseDatabase.getInstance();
+        myRef = database.getReference("expense");
 
         // set date picker
         DateFormat dateFormat =  new SimpleDateFormat("E MMM dd yyyy");
@@ -75,7 +87,7 @@ public class AddBudgetActivity extends AppCompatActivity implements DatePickerDi
         // get widgets
         budgetName = findViewById(R.id.budget_name);
         budgetAmount = findViewById(R.id.budgetAmount);
-
+        notes = findViewById(R.id.enter_notes);
 
 
 
@@ -85,23 +97,41 @@ public class AddBudgetActivity extends AppCompatActivity implements DatePickerDi
 
     public void clickSaveBudget(View view) {
         // check if enter values are legal
+        String transName = budgetName.getText().toString();
+        String transType = budgetType;
+        String transNote = notes.getText().toString();
+        double transAmount;
 
-
+        if (TextUtils.isEmpty(transName)){
+            budgetName.setError("Required. enter a name");
+            Toast.makeText(getApplicationContext(), "Enter a name", Toast.LENGTH_SHORT).show();
+            return ;
+        }
         // could it be nuul?
-        if (budgetAmount.getText().toString() != null) {
-            double amount = Double.parseDouble(budgetAmount.getText().toString());
+        String mm = budgetAmount.getText().toString();
+        if (!TextUtils.isEmpty(mm)) {
+            transAmount  = Double.parseDouble(budgetAmount.getText().toString());
 
+        } else {
+            budgetAmount.setError("Required. enter amount");
+            return ;
+        }
+        if( transDate == null){
+           transDate = new Date();
+        }
+        if(TextUtils.isEmpty(transNote)){
+            transNote = " ";
         }
 
-
-
-
-
-
-        Toast.makeText(getApplicationContext(), "save it! " + budgetAmount.getText().toString(), Toast.LENGTH_SHORT).show();
-
-
+        String transID = myRef.push().getKey();
+        // get trans instance
+        TransactionModel transaction = new TransactionModel(transID, transType, transName, transAmount, transDate, transNote);
         // write to firebase
+        myRef.child(transID).setValue(transaction);
+
+        Toast.makeText(getApplicationContext(), "Successfully saved!" , Toast.LENGTH_SHORT).show();
+
+        // go to some where else ? go back to main page.
 
 
     }
@@ -129,10 +159,16 @@ public class AddBudgetActivity extends AppCompatActivity implements DatePickerDi
 
     @Override
     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+
         Calendar chooseDate = Calendar.getInstance();
         chooseDate.set(Calendar.YEAR, year);
         chooseDate.set(Calendar.MONTH, month);
         chooseDate.set(Calendar.DAY_OF_MONTH, day);
+
+       // transDate = chooseDate;
+        transDate.setTime(chooseDate.getTimeInMillis());
+
+        
 
         // change to string
         String dateString = DateFormat.getDateInstance().format(chooseDate.getTime());
