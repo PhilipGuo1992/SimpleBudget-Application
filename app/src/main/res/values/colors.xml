@@ -6,6 +6,7 @@
     <color name="colorBackgroud">#e6e4e4</color>
     <color name="saveBug">#fff</color>
     <color name="colorTitle">#fffdfd</color>
+    <color name="colorText">#e1acac</color>
 
     <color name="colorLine">#635b5b</color>
 </resources>

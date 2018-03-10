@@ -1,8 +1,10 @@
 package com.example.yunfei.budgetbuddy;
 
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.format.DateUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -10,6 +12,9 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class AddBudgetActivity extends AppCompatActivity {
@@ -20,6 +25,7 @@ public class AddBudgetActivity extends AppCompatActivity {
     private EditText budgetAmount;
     private Date budgetDate;
     private EditText notes;
+    private TextView datePicker;
 
 
 
@@ -30,6 +36,20 @@ public class AddBudgetActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_budget);
+
+        // set date picker
+        DateFormat dateFormat =  new SimpleDateFormat("MMM dd yyyy");
+
+        datePicker = findViewById(R.id.choose_date);
+        datePicker.setText(dateFormat.format(new Date()));
+        datePicker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager manager = getSupportFragmentManager();
+                DatePickFragment datelog = new DatePickFragment();
+                datelog.show(manager, "CURR_DATE");
+            }
+        });
 
         // set tool bar
         addPageToolar = findViewById(R.id.new_budget_bar);
