@@ -1,12 +1,11 @@
 package com.example.yunfei.budgetbuddy;
 
-import android.support.v4.app.FragmentManager;
+import android.app.DatePickerDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.text.format.DateUtils;
-import android.view.MenuItem;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -17,7 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-public class AddBudgetActivity extends AppCompatActivity {
+public class AddBudgetActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
     private EditText budgetName;
     // default
@@ -25,7 +24,7 @@ public class AddBudgetActivity extends AppCompatActivity {
     private EditText budgetAmount;
     private Date budgetDate;
     private EditText notes;
-    private TextView datePicker;
+    private TextView inputDate;
 
 
 
@@ -38,16 +37,16 @@ public class AddBudgetActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_budget);
 
         // set date picker
-        DateFormat dateFormat =  new SimpleDateFormat("MMM dd yyyy");
+        DateFormat dateFormat =  new SimpleDateFormat("E MMM dd yyyy");
 
-        datePicker = findViewById(R.id.choose_date);
-        datePicker.setText(dateFormat.format(new Date()));
-        datePicker.setOnClickListener(new View.OnClickListener() {
+        inputDate = findViewById(R.id.choose_date);
+        inputDate.setText(dateFormat.format(new Date()));
+
+        inputDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentManager manager = getSupportFragmentManager();
-                DatePickFragment datelog = new DatePickFragment();
-                datelog.show(manager, "CURR_DATE");
+               DatePickFragment datePickFragment = new DatePickFragment();
+               datePickFragment.show(getSupportFragmentManager(), "Pick_Date");
             }
         });
 
@@ -126,5 +125,20 @@ public class AddBudgetActivity extends AppCompatActivity {
                     budgetType = "revenue";
                 break;
         }
+    }
+
+    @Override
+    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+        Calendar chooseDate = Calendar.getInstance();
+        chooseDate.set(Calendar.YEAR, year);
+        chooseDate.set(Calendar.MONTH, month);
+        chooseDate.set(Calendar.DAY_OF_MONTH, day);
+
+        // change to string
+        String dateString = DateFormat.getDateInstance().format(chooseDate.getTime());
+        // update ui
+        inputDate.setText(dateString);
+
+
     }
 }
