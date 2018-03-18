@@ -64,32 +64,21 @@ public class BudgOrderFragment extends android.support.v4.app.Fragment implement
     }
 
     private void loadListFromFirebase() {
-        if(myRef != null){
-            myRef.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    transGroup.clear();
 
-                    for (DataSnapshot trans : dataSnapshot.getChildren()){
-                        TransactionModel transModel = trans.getValue(TransactionModel.class);
-                        transGroup.add(transModel);
-
-                    }
-                    // sort by date.
-                    Collections.sort(transGroup);
-
-                    TransModelAdapter transModelAdapter = new TransModelAdapter(getActivity(), transGroup);
-                    transListView.setAdapter(transModelAdapter);
-
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-            });
-
-
+        transGroup = UtilsLoadData.getBudgetList();
+        // sort by date.
+        if(transGroup != null){
+            Collections.sort(transGroup);
+            TransModelAdapter transModelAdapter = new TransModelAdapter(getActivity(), transGroup);
+            transListView.setAdapter(transModelAdapter);
         }
+
     }
+
+
+
+
+
+
+
 }
