@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         Fragment fragment = null;
         switch (item.getItemId()) {
             case R.id.navigation_home:
+                toolTitle.setText("Budget Buddy");
                 fragment = new BudgOrderFragment();
                 break;
             // if click the add button: start new acticity
@@ -56,9 +57,11 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 Intent intent = new Intent(getApplicationContext(), AddBudgetActivity.class);
                 startActivity(intent);
             case R.id.navigation_summary:
+                toolTitle.setText("Budget Summary");
                 fragment = new SummaryBudgetFragment();
                 break;
             case R.id.navigation_lists:
+                toolTitle.setText("Budget list");
                 fragment = new BudgListFragment();
                 break;
 
@@ -78,6 +81,10 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             return false;
         }
 
+
+    }
+
+    private void changeTitleBar(){
 
     }
 

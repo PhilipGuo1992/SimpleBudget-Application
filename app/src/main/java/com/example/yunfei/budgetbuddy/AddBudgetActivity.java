@@ -127,12 +127,11 @@ public class AddBudgetActivity extends AppCompatActivity implements DatePickerDi
         // get trans instance
         TransactionModel transaction = new TransactionModel(transID, transType, transName, transAmount, transDate, transNote);
         // write to firebase
-        myRef.child(budgetType).child(transID).setValue(transaction);
+        myRef.child(transID).setValue(transaction);
 
         Toast.makeText(getApplicationContext(), "Successfully saved!" , Toast.LENGTH_SHORT).show();
-
         // go to some where else ? go back to main page.
-
+        // go back to home page !!!
 
     }
 
@@ -161,6 +160,9 @@ public class AddBudgetActivity extends AppCompatActivity implements DatePickerDi
     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
 
         Calendar chooseDate = Calendar.getInstance();
+
+        Date date = new Date();
+
         chooseDate.set(Calendar.YEAR, year);
         chooseDate.set(Calendar.MONTH, month);
         chooseDate.set(Calendar.DAY_OF_MONTH, day);
