@@ -17,6 +17,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -74,6 +75,8 @@ public class BudgOrderFragment extends android.support.v4.app.Fragment implement
                         transGroup.add(transModel);
 
                     }
+                    // sort by date.
+                    Collections.sort(transGroup);
 
                     TransModelAdapter transModelAdapter = new TransModelAdapter(getActivity(), transGroup);
                     transListView.setAdapter(transModelAdapter);

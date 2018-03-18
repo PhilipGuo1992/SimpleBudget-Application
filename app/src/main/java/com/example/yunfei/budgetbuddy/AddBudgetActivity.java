@@ -131,7 +131,7 @@ public class AddBudgetActivity extends AppCompatActivity implements DatePickerDi
 
         Toast.makeText(getApplicationContext(), "Successfully saved!" , Toast.LENGTH_SHORT).show();
         // go to some where else ? go back to main page.
-
+        // go back to home page !!!
 
     }
 
@@ -160,6 +160,9 @@ public class AddBudgetActivity extends AppCompatActivity implements DatePickerDi
     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
 
         Calendar chooseDate = Calendar.getInstance();
+
+        Date date = new Date();
+
         chooseDate.set(Calendar.YEAR, year);
         chooseDate.set(Calendar.MONTH, month);
         chooseDate.set(Calendar.DAY_OF_MONTH, day);

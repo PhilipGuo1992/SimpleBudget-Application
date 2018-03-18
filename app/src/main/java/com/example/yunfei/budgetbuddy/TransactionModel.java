@@ -1,12 +1,14 @@
 package com.example.yunfei.budgetbuddy;
 
+import android.support.annotation.NonNull;
+
 import java.util.Date;
 
 /**
  * Created by yunfei on 2018-03-06.
  */
 
-public class TransactionModel {
+public class TransactionModel implements Comparable<TransactionModel> {
     // transaction type
     private String budgetType;
     private String name;
@@ -76,5 +78,13 @@ public class TransactionModel {
 
     public void setTransID(String transID) {
         this.transID = transID;
+    }
+
+    // code from : https://stackoverflow.com/questions/5927109/sort-objects-in-arraylist-by-date
+    @Override
+    public int compareTo(@NonNull TransactionModel transactionModel) {
+        if (getDATE() == null || transactionModel.getDATE() == null)
+            return 0;
+        return -(getDATE().compareTo(transactionModel.getDATE()));
     }
 }

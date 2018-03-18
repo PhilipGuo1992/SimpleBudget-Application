@@ -10,6 +10,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -56,10 +59,13 @@ public class TransModelAdapter extends ArrayAdapter<TransactionModel> {
             transOrder.setBackgroundResource(R.color.colorRevenue);
         }
 
-
         transName.setText(currentTrans.getName());
         transAmount.setText(currentTrans.getAmount()+"");
-        transDate.setText(currentTrans.getDATE() .toString());
+
+        DateFormat dateFormat =  new SimpleDateFormat("E MMM dd yyyy");
+
+        transDate.setText(dateFormat.format(currentTrans.getDATE()));
+
 
 
 
