@@ -1,11 +1,13 @@
 package com.example.yunfei.budgetbuddy;
 
 
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.mikephil.charting.animation.Easing;
@@ -32,6 +34,7 @@ public class SummaryBudgetFragment extends android.support.v4.app.Fragment imple
     private PieChart PieExpense, PieRevenue;
     private List<TransactionModel> expenseList = new ArrayList<>();
     private List<TransactionModel> revenueList = new ArrayList<>();
+    private TextView totalExpense, totalRevenue, budgetResult;
 
 
     @Override
@@ -42,6 +45,10 @@ public class SummaryBudgetFragment extends android.support.v4.app.Fragment imple
 
         PieExpense = summaryView.findViewById(R.id.expense_pie);
         PieRevenue = summaryView.findViewById(R.id.revenue_pie);
+        totalExpense = summaryView.findViewById(R.id.total_expense);
+        totalRevenue = summaryView.findViewById(R.id.total_revenue);
+        budgetResult = summaryView.findViewById(R.id.total_budget);
+
 
         List<TransactionModel>  allData = UtilsLoadData.getBudgetList();
         for (TransactionModel model : allData) {
@@ -53,8 +60,10 @@ public class SummaryBudgetFragment extends android.support.v4.app.Fragment imple
 
         }
 
-        setPieChart(PieExpense, "Expense", expenseList);
-        setPieChart(PieRevenue, "Revenue", revenueList);
+        setPieChart(PieExpense, "Expense Summary", expenseList);
+        setPieChart(PieRevenue, "Revenue Summary", revenueList);
+
+        calculateTotalBudget(expenseList, revenueList);
 
 
         return summaryView;
@@ -62,21 +71,52 @@ public class SummaryBudgetFragment extends android.support.v4.app.Fragment imple
 
     }
 
+    private void calculateTotalBudget(List<TransactionModel> expenseList, List<TransactionModel> revenueList) {
+
+        double expense=0, revenue=0, budget=0;
+
+        for(TransactionModel model: expenseList){
+            expense += model.getAmount();
+
+        }
+        for(TransactionModel model: revenueList){
+            revenue += model.getAmount();
+        }
+
+        budget = revenue - expense;
+
+        totalExpense.setText(expense + "");
+        totalRevenue.setText(revenue + "");
+        budgetResult.setText(budget + "");
+
+
+
+    }
+
     private void setPieChart(PieChart PieExpense, String budgetType, List<TransactionModel> budgetList) {
 
         PieExpense.setCenterText(budgetType);
-        PieExpense.setUsePercentValues(true);
+        PieExpense.setUsePercentValues(false);
         PieExpense.setCenterTextSize(12);
         PieExpense.setTransparentCircleAlpha(0);
         PieExpense.setHighlightPerTapEnabled(true);
-        Description description = new Description();
-        description.setText("This is the expense");
+
+
+//        Description description = new Description();
+//        description.setText("This is the expense");
+//        description.setTextSize(24f);
+//        //description.setTextAlign(Paint.Align.RIGHT);
+//
+//        PieExpense.setDescription(description);
+        PieExpense.getDescription().setEnabled(false);
 
         PieExpense.setHoleRadius(46f);
         PieExpense.animateY(900, Easing.EasingOption.EaseInBack);
 
         //PieExpense.setDescription("Monthly expense Pie chart ");
        // loadValueToChart();
+
+
 
         if(budgetList.size() != 0){
 
@@ -88,6 +128,7 @@ public class SummaryBudgetFragment extends android.support.v4.app.Fragment imple
                 yEntrys.add(new PieEntry((float)(budgetList.get(i).getAmount()),
                         budgetList.get(i).getName()));
                 //xEntrys.add(expenseList.get(i).getName());
+
             }
 
             // setup pie data
