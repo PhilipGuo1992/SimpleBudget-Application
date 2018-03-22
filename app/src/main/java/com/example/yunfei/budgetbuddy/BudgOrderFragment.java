@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.RadioGroup;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -32,7 +33,7 @@ public class BudgOrderFragment extends android.support.v4.app.Fragment implement
 
     //
     private ListView transListView;
-
+    private RadioGroup radioGroup;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -49,6 +50,9 @@ public class BudgOrderFragment extends android.support.v4.app.Fragment implement
         View listItemsView = inflater.inflate(R.layout.fragment_order_items, container, false);
 
         transListView = listItemsView.findViewById(R.id.trans_lists);
+        radioGroup = listItemsView.findViewById(R.id.radio_groups);
+
+        radioGroup.setVisibility(View.GONE);
 
         loadListFromFirebase();
 
@@ -64,32 +68,20 @@ public class BudgOrderFragment extends android.support.v4.app.Fragment implement
     }
 
     private void loadListFromFirebase() {
-        if(myRef != null){
-            myRef.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    transGroup.clear();
 
-                    for (DataSnapshot trans : dataSnapshot.getChildren()){
-                        TransactionModel transModel = trans.getValue(TransactionModel.class);
-                        transGroup.add(transModel);
-
-                    }
-                    // sort by date.
-                    Collections.sort(transGroup);
-
-                    TransModelAdapter transModelAdapter = new TransModelAdapter(getActivity(), transGroup);
-                    transListView.setAdapter(transModelAdapter);
-
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-            });
-
-
+        transGroup = UtilsLoadData.getBudgetList();
+        // sort by date.
+        if(transGroup != null){
+            Collections.sort(transGroup);
+            TransModelAdapter transModelAdapter = new TransModelAdapter(getActivity(), transGroup);
+            transListView.setAdapter(transModelAdapter);
         }
+
     }
+    public void onRadioButtonClicked(View view){}
+
+
+
+
+
 }

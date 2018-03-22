@@ -1,6 +1,7 @@
 package com.example.yunfei.budgetbuddy;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,7 +37,6 @@ public class AddBudgetActivity extends AppCompatActivity implements DatePickerDi
     private TextView inputDate;
     private FirebaseDatabase database;
     private DatabaseReference myRef;
-
 
     private Toolbar addPageToolar;
     private TextView toolTitle;
@@ -77,8 +78,12 @@ public class AddBudgetActivity extends AppCompatActivity implements DatePickerDi
         addPageToolar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "go back", Toast.LENGTH_SHORT).show();
+
                 // go back to parent activity
+                Intent intent = new Intent(AddBudgetActivity.this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                finish();
 
             }
         });

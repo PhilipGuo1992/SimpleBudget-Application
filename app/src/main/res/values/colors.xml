@@ -3,12 +3,14 @@
     <color name="colorPrimary">#232121</color>
     <color name="colorPrimaryDark">#2e302f</color>
     <color name="colorAccent">#324578</color>
-    <color name="colorBackgroud">#e6e4e4</color>
+    <color name="colorBackgroud">#d5dadc</color>
     <color name="saveBug">#fff</color>
     <color name="colorTitle">#fffdfd</color>
     <color name="colorText">#e1acac</color>
     <color name="colorExpense">#f2b7b7</color>
     <color name="colorRevenue">#52edeb</color>
-
+    <color name="colorNavi">#dd95f1</color>
     <color name="colorLine">#635b5b</color>
+    <color name="colorDiver">#c1b2b2</color>
+    <color name="colorIcon">#f5f5f5</color>
 </resources>
