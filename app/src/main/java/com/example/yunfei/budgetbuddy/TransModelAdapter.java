@@ -2,6 +2,7 @@ package com.example.yunfei.budgetbuddy;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -20,6 +21,7 @@ import java.util.List;
  */
 
 public class TransModelAdapter extends ArrayAdapter<TransactionModel> {
+    public static String MODEL_ID = "modelId";
 
     private Activity context;
     private List<TransactionModel> tranGroup;
@@ -48,7 +50,7 @@ public class TransModelAdapter extends ArrayAdapter<TransactionModel> {
         transAmount = transView.findViewById(R.id.order_amount);
         transDate = transView.findViewById(R.id.order_date);
 
-        TransactionModel currentTrans = tranGroup.get(position);
+        final TransactionModel currentTrans = tranGroup.get(position);
         // set values
         String budgetType = currentTrans.getBudgetType();
         if(budgetType.equals("expense")){
@@ -67,7 +69,16 @@ public class TransModelAdapter extends ArrayAdapter<TransactionModel> {
         transDate.setText(dateFormat.format(currentTrans.getDATE()));
 
 
+        transView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                String modelID = currentTrans.getTransID();
+                Intent intent = new Intent(getContext(), EditModelActivity.class);
+                intent.putExtra(MODEL_ID, modelID);
+                getContext().startActivity(intent);
+            }
+        });
 
 
 

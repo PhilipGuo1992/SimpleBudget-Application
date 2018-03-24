@@ -18,8 +18,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AddBudgetActivity"
-                    android:parentActivityName=".MainActivity">
+        <activity
+            android:name=".AddBudgetActivity"
+            android:parentActivityName=".MainActivity"></activity>
+
+        <activity android:name=".EditModelActivity"
+            android:parentActivityName=".MainActivity">
+
 
         </activity>
     </application>

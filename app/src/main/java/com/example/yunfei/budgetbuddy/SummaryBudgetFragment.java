@@ -1,6 +1,7 @@
 package com.example.yunfei.budgetbuddy;
 
 
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -95,12 +96,16 @@ public class SummaryBudgetFragment extends android.support.v4.app.Fragment imple
 
     private void setPieChart(PieChart PieExpense, String budgetType, List<TransactionModel> budgetList) {
 
+
         PieExpense.setCenterText(budgetType);
+        PieExpense.setCenterTextColor(Color.BLUE);
+
         PieExpense.setUsePercentValues(false);
         PieExpense.setCenterTextSize(12);
         PieExpense.setTransparentCircleAlpha(0);
         PieExpense.setHighlightPerTapEnabled(true);
 
+        PieExpense.setEntryLabelColor(Color.BLACK);
 
 //        Description description = new Description();
 //        description.setText("This is the expense");
@@ -111,7 +116,7 @@ public class SummaryBudgetFragment extends android.support.v4.app.Fragment imple
         PieExpense.getDescription().setEnabled(false);
 
         PieExpense.setHoleRadius(46f);
-        PieExpense.animateY(900, Easing.EasingOption.EaseInBack);
+        PieExpense.animateY(900, Easing.EasingOption.EaseInOutElastic);
 
         //PieExpense.setDescription("Monthly expense Pie chart ");
        // loadValueToChart();
@@ -132,7 +137,7 @@ public class SummaryBudgetFragment extends android.support.v4.app.Fragment imple
             }
 
             // setup pie data
-            PieDataSet pieDataSet = new PieDataSet(yEntrys, "Expense Amount");
+            PieDataSet pieDataSet = new PieDataSet(yEntrys, budgetType);
             pieDataSet.setSliceSpace(2);
             pieDataSet.setValueTextSize(10);
             pieDataSet.setColors(ColorTemplate.JOYFUL_COLORS);
