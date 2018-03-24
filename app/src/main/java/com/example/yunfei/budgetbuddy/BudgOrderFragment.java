@@ -1,6 +1,7 @@
 package com.example.yunfei.budgetbuddy;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.annotation.Nullable;
@@ -8,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RadioGroup;
 
@@ -25,8 +27,9 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class BudgOrderFragment extends android.support.v4.app.Fragment implements ListView.OnItemClickListener {
+public class BudgOrderFragment extends android.support.v4.app.Fragment  {
 
+    public static String MODEL_ID = "modelId";
     private FirebaseDatabase database;
     private DatabaseReference myRef;
     private List<TransactionModel> transGroup = new ArrayList<>();
@@ -49,7 +52,7 @@ public class BudgOrderFragment extends android.support.v4.app.Fragment implement
         // Inflate the layout for this fragment
         View listItemsView = inflater.inflate(R.layout.fragment_order_items, container, false);
 
-        transListView = listItemsView.findViewById(R.id.trans_lists);
+        transListView =(ListView) listItemsView.findViewById(R.id.trans_lists);
         radioGroup = listItemsView.findViewById(R.id.radio_groups);
 
         radioGroup.setVisibility(View.GONE);
@@ -60,12 +63,6 @@ public class BudgOrderFragment extends android.support.v4.app.Fragment implement
         return listItemsView;
     }
 
-
-
-    @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-    }
 
     private void loadListFromFirebase() {
 

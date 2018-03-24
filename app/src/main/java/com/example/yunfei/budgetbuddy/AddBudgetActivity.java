@@ -109,7 +109,6 @@ public class AddBudgetActivity extends AppCompatActivity implements DatePickerDi
 
         if (TextUtils.isEmpty(transName)){
             budgetName.setError("Required. enter a name");
-            Toast.makeText(getApplicationContext(), "Enter a name", Toast.LENGTH_SHORT).show();
             return ;
         }
         // could it be nuul?
@@ -137,6 +136,11 @@ public class AddBudgetActivity extends AppCompatActivity implements DatePickerDi
         Toast.makeText(getApplicationContext(), "Successfully saved!" , Toast.LENGTH_SHORT).show();
         // go to some where else ? go back to main page.
         // go back to home page !!!
+        // go back to parent activity
+        Intent intent = new Intent(AddBudgetActivity.this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        finish();
 
     }
 
