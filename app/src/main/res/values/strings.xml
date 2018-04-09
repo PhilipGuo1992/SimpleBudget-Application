@@ -4,6 +4,7 @@
     <string name="title_add">Add</string>
     <string name="title_summary">Summary</string>
     <string name="title_lists">List</string>
+    <string name="order_budget">Ordered by Month</string>
 
     <string name="budgetName">Budget Name:</string>
     <string name="budgetType">Budget Type:</string>

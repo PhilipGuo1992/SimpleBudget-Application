@@ -41,7 +41,7 @@
                     android:id="@+id/edit_budget_name"
                     android:layout_width="wrap_content"
                     android:layout_marginLeft="90dp"
-                    android:textColor="@color/colorText"
+                    android:textColor="@color/colorEdit"
                     android:backgroundTint="@android:color/transparent"
                     android:hint="Enter a Name"
                     android:layout_height="wrap_content" />
@@ -50,7 +50,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
+                android:layout_height="1dp"
                 android:background="@color/colorLine"/>
 
             <LinearLayout
@@ -68,23 +68,24 @@
                 <RadioGroup
                     android:layout_width="wrap_content"
                     android:orientation="vertical"
+                    android:id="@+id/edit_radio_group"
                     android:layout_marginLeft="70dp"
                     android:layout_height="wrap_content">
 
                     <RadioButton
-                        android:id="@+id/radio_expense"
+                        android:id="@+id/radio_edit_expense"
                         android:text="Expense"
                         android:textStyle="bold"
                         android:layout_width="wrap_content"
-                        android:textColor="@color/colorText"
+                        android:textColor="@color/colorEdit"
                         android:checked="true"
                         android:onClick="onEditRadioButtonClicked"
                         android:layout_height="wrap_content" />
                     <RadioButton
-                        android:id="@+id/radio_revenue"
+                        android:id="@+id/radio_edit_revenue"
                         android:text="Revenue"
                         android:textStyle="bold"
-                        android:textColor="@color/colorText"
+                        android:textColor="@color/colorEdit"
                         android:onClick="onEditRadioButtonClicked"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
@@ -94,7 +95,7 @@
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
+                android:layout_height="1dp"
                 android:background="@color/colorLine"/>
 
             <LinearLayout
@@ -111,7 +112,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:text="@string/dolorSign"
-                    android:textColor="@color/colorText"
+                    android:textColor="@color/colorEdit"
                     android:layout_marginLeft="60dp"
                     android:textStyle="bold"
                     android:textSize="20sp"
@@ -121,16 +122,15 @@
                     android:layout_width="wrap_content"
                     android:layout_marginLeft="8dp"
                     android:inputType="number"
-                    android:textColor="@color/colorText"
+                    android:textColor="@color/colorEdit"
                     android:backgroundTint="@android:color/transparent"
-                    android:hint="Enter a number"
                     android:layout_height="wrap_content" />
 
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
+                android:layout_height="1dp"
                 android:background="@color/colorLine"/>
 
             <LinearLayout
@@ -140,7 +140,7 @@
                 android:layout_marginBottom="15dp"
                 android:layout_height="wrap_content">
                 <TextView
-                    android:text="Choose Date:"
+                    android:text="Change Date:"
                     android:textSize="20sp"
                     android:layout_marginLeft="8dp"
                     android:textColor="@color/colorAccent"
@@ -159,12 +159,12 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
+                android:layout_height="1dp"
                 android:background="@color/colorLine"/>
 
 
             <TextView
-                android:text="Add notes: "
+                android:text="Edit notes: "
                 android:textSize="20sp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="10dp"
@@ -178,7 +178,6 @@
                 android:layout_width="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:backgroundTint="@android:color/transparent"
-                android:hint="Enter some notes "
                 android:layout_height="100dp" />
 
 
@@ -187,11 +186,12 @@
 
 
     <Button
-        android:id="@+id/saveBudgetBtn"
+        android:id="@+id/editsave"
         android:layout_marginTop="100dp"
         android:textColor="@color/saveBug"
         android:layout_marginBottom="30dp"
         android:layout_marginLeft="10dp"
+        android:onClick="saveEditBtn"
         android:layout_marginRight="10dp"
         android:background="@color/colorPrimaryDark"
         android:text="Save the change"

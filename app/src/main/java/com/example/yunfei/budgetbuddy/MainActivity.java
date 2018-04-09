@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
     private Toolbar mainPageToolar;
     private TextView toolTitle;
+    private BottomNavigationView navigation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,18 +39,16 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
 
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+       navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(this);
 
-
+        selectedFragment(new BudgOrderFragment(), R.id.fragment_container);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        // select default
-        selectedFragment(new BudgOrderFragment(), R.id.fragment_container);
 
     }
 
@@ -96,17 +95,13 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                     .replace(fragment_container, fragment)
                     .commit();
             return true;
+
         } else {
             return false;
+
         }
 
-
     }
-
-    private void changeTitleBar(){
-
-    }
-
 
 }
 
