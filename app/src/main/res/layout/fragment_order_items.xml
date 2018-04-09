@@ -1,0 +1,57 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.yunfei.budgetbuddy.BudgOrderFragment">
+
+    <TextView
+        android:id="@+id/budget_subtitle"
+        android:layout_width="match_parent"
+        android:gravity="center_horizontal"
+        android:textColor="@color/colorPrimary"
+        android:textSize="23sp"
+        android:text="@string/order_budget"
+        android:layout_height="wrap_content" />
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/radio_groups"
+        android:layout_marginLeft="70dp"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/radio_expense"
+            android:text="Expense"
+            android:textStyle="bold"
+            android:layout_marginRight="60dp"
+            android:layout_width="wrap_content"
+            android:textSize="22dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:checked="true"
+            android:layout_height="wrap_content" />
+        <RadioButton
+            android:id="@+id/radio_revenue"
+            android:text="Revenue"
+            android:textStyle="bold"
+            android:textSize="22dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RadioGroup>
+
+    <ListView
+        android:id="@+id/trans_lists"
+        android:layout_width="match_parent"
+        android:smoothScrollbar="true"
+        android:scrollbars="none"
+        android:layout_height="match_parent">
+
+
+
+
+    </ListView>
+
+
+</LinearLayout>
