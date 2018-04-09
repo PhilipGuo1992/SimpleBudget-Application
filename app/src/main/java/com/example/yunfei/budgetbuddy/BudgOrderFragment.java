@@ -69,16 +69,13 @@ public class BudgOrderFragment extends android.support.v4.app.Fragment  {
         transGroup = UtilsLoadData.getBudgetList();
         // sort by date.
         if(transGroup != null){
+            //https://stackoverflow.com/questions/5927109/sort-objects-in-arraylist-by-date
+            // [3]
             Collections.sort(transGroup);
             TransModelAdapter transModelAdapter = new TransModelAdapter(getActivity(), transGroup);
             transListView.setAdapter(transModelAdapter);
         }
 
     }
-    public void onRadioButtonClicked(View view){}
-
-
-
-
 
 }

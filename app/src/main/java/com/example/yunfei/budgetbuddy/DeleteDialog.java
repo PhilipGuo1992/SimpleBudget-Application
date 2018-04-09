@@ -2,6 +2,7 @@ package com.example.yunfei.budgetbuddy;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -38,6 +39,12 @@ public class DeleteDialog extends DialogFragment {
 
 
 
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        deleteBudgetDialog = (DeleteBudgetDialog) context;
     }
 
     public interface DeleteBudgetDialog{

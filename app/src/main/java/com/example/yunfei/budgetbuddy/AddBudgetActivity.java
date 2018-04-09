@@ -67,6 +67,7 @@ public class AddBudgetActivity extends AppCompatActivity implements DatePickerDi
         addPageToolar = findViewById(R.id.new_budget_bar);
         // four line code from online:
         // https://stackoverflow.com/questions/26533510/android-toolbar-center-title-and-custom-font
+        //[1]
         toolTitle = addPageToolar.findViewById(R.id.toolbar_title);
         setSupportActionBar(addPageToolar);
         toolTitle.setText("Add Budget");
@@ -74,6 +75,7 @@ public class AddBudgetActivity extends AppCompatActivity implements DatePickerDi
 
         // set action icon; code from StackOverflow
         //https://stackoverflow.com/questions/26582075/cannot-catch-toolbar-home-button-click-event/31499604
+        //[2]
         addPageToolar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_action_cancel));
         addPageToolar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
